@@ -3,7 +3,7 @@ import { ManifestResponse } from "../pages/Root/Root";
 import { Action } from "./Actions";
 
 export interface State {
-  manifest?: ManifestResponse["photo_manifest"];
+  manifest?: ManifestResponse["photos"];
 }
 
 export const initialState: State = {

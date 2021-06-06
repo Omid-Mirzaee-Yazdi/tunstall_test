@@ -4,7 +4,7 @@ import { ManifestResponse } from "../pages/Root/Root";
 const SET_MANIFEST = "SET_MANIFEST" as const;
 
 // action functions
-const setManifest = (manifest: ManifestResponse["photo_manifest"]) => ({
+const setManifest = (manifest: ManifestResponse["photos"]) => ({
   type: SET_MANIFEST,
   payload: manifest,
 });

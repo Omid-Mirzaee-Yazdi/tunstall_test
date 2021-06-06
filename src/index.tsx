@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Root from "./pages/Root/Root";
 import NotFound from "./pages/NotFound/NotFound";
 import { withContextProvider } from "./store/Provider";
+import Slideshow from "./pages/Root/Slideshow";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.render(
       return (
         <BrowserRouter>
           <Switch>
+            <Route path="/slideshow" component={Slideshow} />
             <Route path="/" component={Root} />
             <Route path="*" render={NotFound} />
           </Switch>

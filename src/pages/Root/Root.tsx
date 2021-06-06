@@ -14,21 +14,25 @@ import { useHistory } from "react-router-dom";
 */
 
 export type ManifestResponse = {
-  photo_manifest: {
-    landing_date: string;
-    launch_date: string;
-    max_date: string;
-    max_sol: number;
-    name: string;
-    photos: Array<{
-      cameras: string[];
-      earth_date: string;
-      sol: number;
-      total_photos: number;
-    }>;
-    status: string;
-    total_photos: number;
-  };
+  photos: Array<{
+    id: number;
+    sol: number;
+    img_src: string;
+    earth_date: string;
+    camera: {
+      id: number;
+      name: string;
+      rover_id: number;
+      full_name: string;
+    };
+    rover:  {
+      id: number;
+      name: string;
+      landing_date: string;
+      launch_date: string;
+      status: string;
+    };
+  }>;
 };
 
 const Root = () => {
@@ -38,22 +42,23 @@ const Root = () => {
   const history = useHistory();
   const classes = useStyles();
 
-  const API_KEY = "See doc";
+  const API_KEY = "7JPxXLG7jt4HrODSGLDRJvhVFYgle7bfn665ZpOc";
 
   useEffect(() => {
     (async () => {
       const {
-        data: { photo_manifest },
+        data: { photos },
       } = await axios.get<ManifestResponse>(
-        `https://api.nasa.gov/mars-photos/api/v1/manifests/Curiosity?api_key=${API_KEY}`
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2020-09-27&api_key=${API_KEY}`
       );
-      dispatch(setManifest(photo_manifest));
+      dispatch(setManifest(photos));
     })();
   }, [dispatch]);
 
   return (
     <div className={classes.rootcontainer}>
-      {manifest && <h1>{`${manifest.name} is ${manifest.status}!`}</h1>}
+      {manifest && <h1>{`Lets see Mars on ${manifest[0]?.earth_date}!`}</h1>}
+      
       <Button
         classes={{ text: classes.button }}
         onClick={() => {
