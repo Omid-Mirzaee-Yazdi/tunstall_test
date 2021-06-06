@@ -57,12 +57,12 @@ const Root = () => {
 
   return (
     <div className={classes.rootcontainer}>
-      {manifest && <h1>{`Lets see Mars on ${manifest[0]?.earth_date}!`}</h1>}
+      {manifest && <h1>{`Lets see Mars on ${manifest[0]?.earth_date}!`}</h1>} {/*to confirm that data is fetched*/}
       
       <Button
         classes={{ text: classes.button }}
         onClick={() => {
-          history.push("/slideshow");
+          history.push("/slideshow");{/*link to slideshow*/}
         }}
       >
         Show slideshow

@@ -11,32 +11,31 @@ import { useStyles } from "./Root.styles";
 */
 
 const Slideshow = () => {
-  const { manifest } = useContext(StateContext);
-  const history=useHistory();
-  const classes = useStyles();
-  const [imgno, setimgno]=useState(1);
-  const mximgno=manifest?.length||0;
-  const paths= manifest?.map((data) => data.img_src)||[];
+  const { manifest } = useContext(StateContext); // load data from the context api
+  const history=useHistory(); // to go back to main page incase of no photo 
+  const classes = useStyles(); 
+  const [imgno, setimgno]=useState(1); // index of the images
+  const mximgno=manifest?.length||0; // number of items in the list 
+  const paths= manifest?.map((data) => data.img_src)||[]; // only get the paths out of the object
 
 
   const changeimg=(action:string)=>{
-    if(action==="next"){
-      if (imgno===mximgno){
+    if(action==="next"){ //check for the action next
+      if (imgno===mximgno){ // maximum image reached start over
         setimgno(1);
-      }else{
+      }else{ // next picture
         setimgno(imgno+1);
       }
-    }else{
-      if (imgno===1){
+    }else{//check for the action prev
+      if (imgno===1){ //first picture reached, show the last one
         setimgno(mximgno);
-      }else{
+      }else{ // previous pic
         setimgno(imgno-1);
       }
     }
   }
 
-console.log(typeof manifest)
-  if (mximgno===0){
+  if (mximgno===0){ // no pic available go back home
     history.push('/');
   }
 
@@ -52,7 +51,7 @@ console.log(typeof manifest)
           prev
         </Button>
 
-          <img className={classes.images} src={paths[imgno]}/>
+          <img className={classes.images} src={paths[imgno-1]}/>
           
           <Button
           classes={{ text: classes.button }}
