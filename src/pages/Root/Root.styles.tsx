@@ -11,7 +11,7 @@ export const useStyles = makeStyles(() => ({
   },
 
   images: {
-    width:"100%",
+    width: "calc(100% - 400px)",
     height:"100%",
     objectFit: "contain",
   },
